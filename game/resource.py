@@ -8,7 +8,8 @@ class Resource:
         self.amount=0;
     def update(self,value):
         self.amount=value;
-
+    def research(val):
+        self.bonus=self.bonus+val;
 class Cost(Resource):
     def __init__(self,name,amount,multi):
         self.o_amount=amount;

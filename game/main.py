@@ -27,10 +27,13 @@ def render(state):
         for cost in b.costs:
             if not game_state['wallet'].has(cost.name):
                 visible=False;
-            costs_string+="("+cost.name+": "+str(round(cost.amount))+") "
-        if visible:drawtext(f"{keys[i]}:) {b.name}: {str(round(b.count))} {costs_string}",font_size,start_x_buildings,start_y_buildings+i*30,255,255,192)
+            costs_string+="("+cost.name+": "+str(round(cost.amount))+")"
+        if visible:
+            drawtext(f"{keys[i]}:) {b.name}: {str(round(b.count))} bonus:{b.bonus}",font_size,start_x_buildings,start_y_buildings+i*60,255,255,192)
+            drawtext(costs_string,font_size,start_x_buildings,start_y_buildings+i*60+28,255,255,192)
     for i,b in enumerate(game_state['wallet'].resources):
-        drawtext(b.name+": "+str(round(b.amount)),font_size,start_x_resources,start_y_resources+i*30,255,255,192)
+        drawtext(b.name+": "+str(round(b.amount)),font_size,start_x_resources,start_y_resources+i*60,255,255,192)
+        drawtext("bonus:"+str(b.bonus),font_size,start_x_resources,start_y_resources+i*60+28,255,255,192)
     #if relocations >= 1:
     #    drawtext('(F) Farms ' + '(costs: ' + str(farmcost) + ' trees): ' + str(round(farms)), 18, 10, 110, 255, 255, 255)
     pygame.display.update()
@@ -43,7 +46,7 @@ def update(state):
         for afb in building.affects:
             for resource in state['wallet'].resources:
                 if afb.name==resource.name and building.count>0:
-                    bonus = ((resource.bonus&building.bonus)*(resource.bonus&building.bonus))
+                    bonus = ((resource.bonus&building.bonus)*(resource.bonus&building.bonus))*building.count; 
                     resource.amount += ((afb.amount*building.count / 60)  * state['tick_rate']) + bonus
     return state;
 

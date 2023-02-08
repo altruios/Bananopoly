@@ -11,9 +11,9 @@ def relocate(args):
     game_state = args[1][0];
     rc = game_state['research_count'];
     for building in game_state['Buildings']:
+        building.bonus=building.bonus+building.count;
         if(building.name=="relocation matrix"):continue;
         building.reset();
-        building.bonus=building.bonus+1;
     game_state["wallet"].reset();
     rc=rc+1;
     game_state['wallet'].research(rc)
@@ -37,7 +37,7 @@ buildings = [
     Function_Building(
         Building(
             "laboratory",
-            [Cost("banana",10,0.9), Cost("banasteel",100,1.1)],
+            [Cost("banana",10,0.9), Cost("banasteel",100,0.56)],
             [Affect("research",1,0)],
             0,#bonus
             ), 
@@ -45,7 +45,7 @@ buildings = [
     Function_Building(
         Building(
             "relocation matrix",
-            [Cost("research",1000,1.2),Cost('banasteel',2000,1.3),Cost("banana",1235,1.2345)],
+            [Cost("research",888,1.2),Cost('banasteel',999,1.2),Cost("banana",1111,1.2345)],
             [Affect("banacities",1,0)],
             1
             ), 
@@ -55,5 +55,5 @@ buildings = [
         [Cost("banana",1,1.2),Cost('banasteel',192,1.3),Cost("banacities",100,1.2345)],
         [Affect("bananhumans",1,0)],
         1
-            ), 
+        ), 
 ]

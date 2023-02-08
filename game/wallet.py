@@ -9,7 +9,8 @@ class Wallet:
             cur.reset();
         self.resources[0].amount=1;
     def research(self,val):
-        self.discount_bonus=val;
+        for cur in self.resources:
+            cur.bonus=cur.bonus+val;
 
     def Buy(self,building):
         return building.buy(self);
