@@ -16,7 +16,6 @@ class Cost(Resource):
         self.name=name;
         self.amount=amount;
         self.multi=multi;
-        self.bonus=0;
     def reset(self):
         self.amount=self.o_amount;
     def increase(self):
